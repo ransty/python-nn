@@ -15,8 +15,8 @@ X = np.array([[0,0,1],
             [1,1,1]])
 
 # Output data (4 examples, one output neuron each)
-y = np.array([[0],
-            [1],
+y = np.array([[1],
+            [0],
             [1],
             [0]])
 
@@ -28,7 +28,7 @@ syn0 = 2*np.random.random((3, 4)) - 1 # 3x4 matrix of weights (random weights)
 syn1 = 2*np.random.random((4, 1)) - 1 # 4x1 matrix of weights (random weights)
 
 # training time
-for j in range(200000):
+for j in range(100000):
     aa = X
     ff = nonlin(np.dot(aa, syn0))
     ee = nonlin(np.dot(ff, syn1)) # predictions (sigmoid)
