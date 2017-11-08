@@ -3,7 +3,7 @@ import numpy as np
 # The program creates an neural network that simulates the exclusive OR function with two inputs and one output
 
 # Sigmoid function
-def nonlin(x, deriv=False):
+def sigmoidfn(x, deriv=False):
     if(deriv==True):
         return (x*(1-x))
     return 1/(1+np.exp(-x))
@@ -30,19 +30,19 @@ syn1 = 2*np.random.random((4, 1)) - 1 # 4x1 matrix of weights (random weights)
 # training time
 for j in range(100000):
     aa = X
-    ff = nonlin(np.dot(aa, syn0))
-    ee = nonlin(np.dot(ff, syn1)) # predictions (sigmoid)
+    ff = sigmoidfn(np.dot(aa, syn0))
+    ee = sigmoidfn(np.dot(ff, syn1)) # predictions (sigmoid)
 
     # backpropagation (chain rule)
     ee_error = y - ee
     if(j % 10000) == 0:
         print("Error: " + str(np.mean(np.abs(ee_error))))
 
-    ee_delta = ee_error*nonlin(ee, deriv=True) # used to reduce error rate
+    ee_delta = ee_error*sigmoidfn(ee, deriv=True) # used to reduce error rate
 
     ff_error = ee_delta.dot(syn1.T) # how much layer one contributed to the error
 
-    ff_delta = ff_error * nonlin(ff, deriv=True)
+    ff_delta = ff_error * sigmoidfn(ff, deriv=True)
 
     # update weights (gradient descent)
     syn0 += aa.T.dot(ff_delta)
